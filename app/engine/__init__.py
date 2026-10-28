@@ -1,0 +1,51 @@
+"""Trip planning engine: Dijkstra-based planner and LLM integration."""
+
+from .planner import (
+    Planner,
+    charge_minutes,
+    check_plan,
+    consumption_wh_per_km,
+    fmt_dur,
+    fmt_time,
+    plan_trip,
+    prepare_candidates,
+    taper,
+    vehicle_power,
+)
+from .language import (
+    DEFAULT_MODEL,
+    USAGE,
+    budget_ok,
+    explain_with_llm,
+    get_llm,
+    numbers_ok,
+    parse_with_llm,
+    plan_facts,
+    template_explanation,
+    text_of,
+    track_usage,
+)
+
+__all__ = [
+    "DEFAULT_MODEL",
+    "Planner",
+    "USAGE",
+    "budget_ok",
+    "charge_minutes",
+    "check_plan",
+    "consumption_wh_per_km",
+    "explain_with_llm",
+    "fmt_dur",
+    "fmt_time",
+    "get_llm",
+    "numbers_ok",
+    "parse_with_llm",
+    "plan_facts",
+    "plan_trip",
+    "prepare_candidates",
+    "taper",
+    "template_explanation",
+    "text_of",
+    "track_usage",
+    "vehicle_power",
+]

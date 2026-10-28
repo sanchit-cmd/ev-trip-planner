@@ -8,5 +8,7 @@ dependencies = [
     "langchain-google-genai>=4.4.2",
     "langgraph>=1.2.16",
     "pydantic>=2.14.1",
+    "python-dotenv>=1.2.4",
     "requests>=2.34.2",
+    "streamlit>=1.66.1",
 ]

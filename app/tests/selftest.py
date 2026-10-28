@@ -5,13 +5,14 @@ import random
 from datetime import datetime
 from typing import Any, Optional
 
-from . import cache, language
-from .language import numbers_ok, plan_facts, template_explanation
-from .models import Charger, Config, IST, TripRequest, VEHICLES, match_vehicle
-from .planner import (charge_minutes, check_plan, consumption_wh_per_km, fmt_dur, plan_trip)
-from .rendering import render_map
-from .routing import conn_kind, haversine, make_route, point_at
-from .workflow import build_graph
+from ..services import cache
+from ..engine import language
+from ..engine.language import numbers_ok, plan_facts, template_explanation
+from ..core.models import Charger, Config, IST, TripRequest, VEHICLES, match_vehicle
+from ..engine.planner import (charge_minutes, check_plan, consumption_wh_per_km, fmt_dur, plan_trip)
+from ..ui.rendering import render_map
+from ..services.routing import conn_kind, haversine, make_route, point_at
+from ..workflow.graph import build_graph
 
 
 def selftest() -> None:

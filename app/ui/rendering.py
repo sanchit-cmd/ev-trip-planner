@@ -3,8 +3,8 @@ from __future__ import annotations
 import html as html_lib
 import json
 
-from .models import Plan, Route
-from .planner import fmt_dur
+from ..core.models import Plan, Route
+from ..engine.planner import fmt_dur
 
 
 def render_text(s: dict) -> str:

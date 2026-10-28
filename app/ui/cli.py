@@ -4,10 +4,10 @@ import argparse
 import json
 from dataclasses import asdict
 
-from .models import VEHICLES, Vehicle
+from ..core.models import VEHICLES, Vehicle
 from .rendering import render_map
-from .selftest import selftest
-from .workflow import build_graph, log
+from ..tests.selftest import selftest
+from ..workflow.graph import build_graph, log
 
 
 def main() -> None:

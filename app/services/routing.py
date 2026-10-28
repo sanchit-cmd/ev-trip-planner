@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Optional
 
 from . import cache
-from .models import Charger, IST, Route
+from ..core.models import Charger, IST, Route
 
 
 def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:

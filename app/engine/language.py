@@ -7,8 +7,8 @@ import re
 from datetime import date, datetime
 from typing import Any
 
-from . import cache
-from .models import IST, Plan, TripRequest
+from ..services import cache
+from ..core.models import IST, Plan, TripRequest
 from .planner import fmt_dur
 
 
@@ -22,8 +22,8 @@ def budget_ok() -> bool:
     limit = int(os.getenv("DAILY_TOKEN_BUDGET", "100000"))
     if limit <= 0:
         return True
-    row = cache.get_db().execute("SELECT tokens FROM usage WHERE day=?", (date.today().isoformat(),)).fetchone()
-    return (row[0] if row else 0) < limit
+    used = cache.get_usage(date.today().isoformat())
+    return used < limit
 
 
 def track_usage(msg: Any) -> None:
@@ -32,9 +32,8 @@ def track_usage(msg: Any) -> None:
     USAGE["llm_calls"] += 1
     USAGE["input_tokens"] += i
     USAGE["output_tokens"] += o
-    day = date.today().isoformat()
-    cache.get_db().execute("INSERT INTO usage VALUES (?,?) ON CONFLICT(day) DO UPDATE SET tokens = tokens + ?", (day, i + o, i + o))
-    cache.get_db().commit()
+    cache.record_usage(date.today().isoformat(), i + o)
+
 
 
 def get_llm():

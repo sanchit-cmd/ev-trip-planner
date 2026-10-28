@@ -1,6 +1,6 @@
 """
-EV Trip Planner (single file)
-=============================
+EV Trip Planner
+===============
 Natural-language EV trip request -> feasible multi-stop charging plan + friendly explanation.
 
 Pipeline (LangGraph):
@@ -36,3 +36,8 @@ Limits to be honest about: energy use is a documented heuristic (no elevation da
 India is incomplete or stale in places, detours are estimated from straight-line distance, and queueing
 at chargers is not modelled. Treat plans as decision support, not a guarantee.
 """
+
+from .core.config import load_env
+
+__all__ = ["load_env"]
+

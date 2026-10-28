@@ -8,3 +8,16 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Local SQLite databases & caches
+*.db
+.ev_planner.db
+
+# Output artifacts
+trip.html
+plan.json

@@ -5,8 +5,8 @@ from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-from .models import Charger, Config, Plan, Route, Stop, Vehicle, IST
-from .routing import project
+from ..core.models import Charger, Config, Plan, Route, Stop, Vehicle, IST
+from ..services.routing import project
 
 
 def consumption_wh_per_km(v: Vehicle, avg_kmh: float, temp_c: Optional[float]) -> float:

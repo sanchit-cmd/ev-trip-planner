@@ -10,10 +10,14 @@ from typing import Optional, TypedDict
 
 from langgraph.graph import END, StateGraph
 
-from . import cache, language, planner, rendering, routing
-from .language import USAGE, plan_facts, template_explanation, numbers_ok
-from .models import Config, IST, Plan, Route, Vehicle, VEHICLES, match_vehicle
-from .planner import Planner
+from ..services import cache
+from ..engine import language
+from ..engine import planner
+from ..ui import rendering
+from ..services import routing
+from ..engine.language import USAGE, plan_facts, template_explanation, numbers_ok
+from ..core.models import Config, IST, Plan, Route, Vehicle, VEHICLES, match_vehicle
+from ..engine.planner import Planner
 
 
 class State(TypedDict, total=False):
@@ -142,9 +146,8 @@ def n_explain(s: State) -> dict:
 def n_finalize(s: State) -> dict:
     out = rendering.render_text(s)
     if s.get("plan") and not s.get("clarification"):
-        cache.get_db().execute("INSERT INTO trips(created, request, result) VALUES (?,?,?)",
-                         (datetime.now(IST).isoformat(), json.dumps(s.get("req")), json.dumps(asdict(s["plan"]), default=str)))
-        cache.get_db().commit()
+        cache.record_trip(datetime.now(IST).isoformat(), s.get("req"), asdict(s["plan"]))
+
     if USAGE["llm_calls"]:
         out += f"\n(LLM usage: {USAGE['llm_calls']} call(s), {USAGE['input_tokens']} in / {USAGE['output_tokens']} out tokens)"
     return {"output": out}
